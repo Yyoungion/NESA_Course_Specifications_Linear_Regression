@@ -2,14 +2,15 @@ import exporter
 import pickle
 import numpy as np
 import os
-#Create a folder for the output files
-if not os.path.exists("../output"):
-    os.makedirs("../output")
 
-exporter.save_model()
+# Load the saved model
+with open("examples\output\my_saved_model.sav", "rb") as f:
+    loaded_model = pickle.load(f)
 
-loaded_model = pickle.load(open('../output/my_saved_model.sav', 'rb'))
-predict = np.array([4]).reshape(1, -1)
-result = loaded_model.predict(predict)
+# Prepare input for prediction
+predict_input = np.array([[4]])
+
+# Make prediction
+result = loaded_model.predict(predict_input)
+
 print(result[0])
-
